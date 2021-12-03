@@ -660,10 +660,12 @@ impl Context {
 
         let memory = self.memory.lock();
         let focus_id = memory.interaction.focus.id;
-        output.accesskit_update.focus = self.has_focus().then(|| focus_id.map_or_else(
-            || crate::accesskit_root_id().accesskit_id(),
-            |id| id.accesskit_id(),
-        ));
+        output.accesskit_update.focus = self.has_focus().then(|| {
+            focus_id.map_or_else(
+                || crate::accesskit_root_id().accesskit_id(),
+                |id| id.accesskit_id(),
+            )
+        });
         std::mem::drop(memory);
 
         let shapes = self.drain_paint_lists();
