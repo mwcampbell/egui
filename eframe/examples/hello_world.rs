@@ -3,6 +3,7 @@ use eframe::{egui, epi};
 struct MyApp {
     name: String,
     age: u32,
+    checked: bool,
 }
 
 impl Default for MyApp {
@@ -10,6 +11,7 @@ impl Default for MyApp {
         Self {
             name: "Arthur".to_owned(),
             age: 42,
+            checked: false,
         }
     }
 }
@@ -20,7 +22,7 @@ impl epi::App for MyApp {
     }
 
     fn update(&mut self, ctx: &egui::CtxRef, frame: &mut epi::Frame<'_>) {
-        let Self { name, age } = self;
+        let Self { name, age, checked } = self;
 
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("My egui Application");
@@ -33,6 +35,7 @@ impl epi::App for MyApp {
                 *age += 1;
             }
             ui.label(format!("Hello '{}', age {}", name, age));
+            ui.checkbox(checked, "Check me");
         });
 
         // Resize the native window to be just the size we need it to be:
