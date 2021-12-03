@@ -69,6 +69,10 @@ impl Id {
     pub(crate) fn value(&self) -> u64 {
         self.0
     }
+
+    pub(crate) fn accesskit_id(&self) -> accesskit::NodeId {
+        accesskit::NodeId(std::num::NonZeroU64::new(self.0).unwrap())
+    }
 }
 
 impl std::fmt::Debug for Id {

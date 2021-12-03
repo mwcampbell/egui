@@ -35,6 +35,8 @@ pub struct Output {
 
     /// Screen-space position of text edit cursor (used for IME).
     pub text_cursor_pos: Option<crate::Pos2>,
+
+    pub accesskit_update: accesskit::TreeUpdate,
 }
 
 impl Output {
@@ -71,6 +73,7 @@ impl Output {
             mut events,
             mutable_text_under_cursor,
             text_cursor_pos,
+            mut accesskit_update,
         } = newer;
 
         self.cursor_icon = cursor_icon;
@@ -84,6 +87,15 @@ impl Output {
         self.events.append(&mut events);
         self.mutable_text_under_cursor = mutable_text_under_cursor;
         self.text_cursor_pos = text_cursor_pos.or(self.text_cursor_pos);
+        self.accesskit_update
+            .nodes
+            .append(&mut accesskit_update.nodes);
+        if accesskit_update.tree.is_some() {
+            self.accesskit_update.tree = accesskit_update.tree;
+        }
+        if accesskit_update.focus.is_some() {
+            self.accesskit_update.focus = accesskit_update.focus;
+        }
     }
 
     /// Take everything ephemeral (everything except `cursor_icon` currently)

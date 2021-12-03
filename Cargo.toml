@@ -24,3 +24,7 @@ opt-level = 2 # fast and small wasm, basically same as `opt-level = 's'`
 # opt-level = 3 # unecessarily large wasm for no performance gain
 
 # debug = true # include debug symbols, useful when profiling wasm
+
+[patch.crates-io.winit]
+git = "https://github.com/mwcampbell/winit"
+branch = "accesskit"

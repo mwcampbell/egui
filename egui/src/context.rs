@@ -596,6 +596,22 @@ impl Context {
                 interactable: true,
             },
         );
+
+        let mut frame_state = self.frame_state.lock();
+        let mut output = self.output();
+        let nodes = &mut output.accesskit_update.nodes;
+        assert!(nodes.is_empty());
+        let id = crate::accesskit_root_id();
+        let accesskit_id = id.accesskit_id();
+        let node = accesskit::Node::new(accesskit_id, accesskit::Role::Window);
+        nodes.push(node);
+        frame_state.accesskit_nodes.insert(id, nodes.len() - 1);
+        assert!(output.accesskit_update.tree.is_none());
+        output.accesskit_update.tree = Some(accesskit::Tree::new(
+            crate::accesskit_tree_id(),
+            accesskit_id,
+            accesskit::StringEncoding::Utf8,
+        ));
     }
 
     /// Load fonts unless already loaded.
@@ -641,6 +657,14 @@ impl Context {
             self.repaint_requests.fetch_sub(1, SeqCst);
             output.needs_repaint = true;
         }
+
+        let memory = self.memory.lock();
+        let focus_id = memory.interaction.focus.id;
+        output.accesskit_update.focus = Some(focus_id.map_or_else(
+            || crate::accesskit_root_id().accesskit_id(),
+            |id| id.accesskit_id(),
+        ));
+        std::mem::drop(memory);
 
         let shapes = self.drain_paint_lists();
         (output, shapes)
@@ -994,5 +1018,37 @@ impl Context {
         let mut style: Style = (*self.style()).clone();
         style.ui(ui);
         self.set_style(style);
+    }
+}
+
+/// ## Accessibility
+impl Context {
+    pub fn new_accesskit_node(&self, id: Id, parent_id: Id, f: impl FnOnce(&mut accesskit::Node)) {
+        let accesskit_id = id.accesskit_id();
+        let mut node = accesskit::Node {
+            ignored: true,
+            ..accesskit::Node::new(accesskit_id, accesskit::Role::GenericContainer)
+        };
+        f(&mut node);
+        let mut frame_state = self.frame_state.lock();
+        assert!(!frame_state.accesskit_nodes.contains_key(&id));
+        let mut output = self.output();
+        let nodes = &mut output.accesskit_update.nodes;
+        nodes.push(node);
+        let index = nodes.len() - 1;
+        frame_state.accesskit_nodes.insert(id, index);
+        let parent_index = frame_state.accesskit_nodes.get(&parent_id).unwrap();
+        let parent = &mut nodes[*parent_index];
+        parent.children.push(accesskit_id);
+    }
+
+    pub fn modify_accesskit_node(&self, id: Id, f: impl FnOnce(&mut accesskit::Node)) {
+        let frame_state = self.frame_state.lock();
+        let mut output = self.output();
+        let nodes = &mut output.accesskit_update.nodes;
+        let index = frame_state.accesskit_nodes.get(&id).unwrap();
+        let node = &mut nodes[*index];
+        std::mem::drop(frame_state);
+        f(node);
     }
 }

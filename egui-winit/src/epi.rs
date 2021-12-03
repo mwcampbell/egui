@@ -10,7 +10,8 @@ pub fn window_builder(
         .with_decorations(native_options.decorated)
         .with_resizable(native_options.resizable)
         .with_transparent(native_options.transparent)
-        .with_window_icon(window_icon);
+        .with_window_icon(window_icon)
+        .with_accesskit_factory(egui::accesskit_placeholder_tree_update());
 
     window_builder =
         window_builder_drag_and_drop(window_builder, native_options.drag_and_drop_support);

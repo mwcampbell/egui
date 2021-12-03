@@ -30,6 +30,10 @@ nohash-hasher = "0.2"
 ron = { version = "0.7", optional = true }
 serde = { version = "1", features = ["derive", "rc"], optional = true }
 
+[dependencies.accesskit]
+git = "https://github.com/AccessKit/accesskit"
+branch = "egui-work"
+
 [features]
 default = ["default_fonts", "single_threaded"]
 

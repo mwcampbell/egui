@@ -141,7 +141,7 @@ pub(crate) struct Interaction {
 #[derive(Clone, Debug, Default)]
 pub(crate) struct Focus {
     /// The widget with keyboard focus (i.e. a text input field).
-    id: Option<Id>,
+    pub(crate) id: Option<Id>,
 
     /// What had keyboard focus previous frame?
     id_previous_frame: Option<Id>,
@@ -271,6 +271,7 @@ impl Focus {
         } else if self.pressed_tab && self.id == None && !self.give_to_next {
             // nothing has focus and the user pressed tab - give focus to the first widgets that wants it:
             self.id = Some(id);
+            self.pressed_tab = false;
         }
 
         self.last_interested = Some(id);

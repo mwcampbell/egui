@@ -531,6 +531,8 @@ impl State {
         if let Some(egui::Pos2 { x, y }) = output.text_cursor_pos {
             window.set_ime_position(winit::dpi::LogicalPosition { x, y });
         }
+
+        window.update_accesskit(output.accesskit_update);
     }
 
     fn set_cursor_icon(&mut self, window: &winit::window::Window, cursor_icon: egui::CursorIcon) {

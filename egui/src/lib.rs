@@ -590,3 +590,24 @@ pub fn __run_test_ui(mut add_contents: impl FnMut(&mut Ui)) {
         });
     });
 }
+
+pub fn accesskit_root_id() -> Id {
+    Id::new("accesskit_root")
+}
+
+pub(crate) fn accesskit_tree_id() -> accesskit::TreeId {
+    accesskit::TreeId("egui".into())
+}
+
+pub fn accesskit_placeholder_tree_update() -> accesskit::TreeUpdate {
+    let root_id = accesskit_root_id().accesskit_id();
+    accesskit::TreeUpdate {
+        nodes: vec![accesskit::Node::new(root_id, accesskit::Role::Window)],
+        tree: Some(accesskit::Tree::new(
+            accesskit_tree_id(),
+            root_id,
+            accesskit::StringEncoding::Utf8,
+        )),
+        ..Default::default()
+    }
+}

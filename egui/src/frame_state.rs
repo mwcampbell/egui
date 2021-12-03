@@ -29,6 +29,8 @@ pub(crate) struct FrameState {
     pub(crate) scroll_delta: Vec2, // TODO: move to a Mutex inside of `InputState` ?
     /// horizontal, vertical
     pub(crate) scroll_target: [Option<(f32, Align)>; 2],
+
+    pub(crate) accesskit_nodes: IdMap<usize>,
 }
 
 impl Default for FrameState {
@@ -41,6 +43,7 @@ impl Default for FrameState {
             tooltip_rect: None,
             scroll_delta: Vec2::ZERO,
             scroll_target: [None; 2],
+            accesskit_nodes: Default::default(),
         }
     }
 }
@@ -55,6 +58,7 @@ impl FrameState {
             tooltip_rect,
             scroll_delta,
             scroll_target,
+            accesskit_nodes,
         } = self;
 
         used_ids.clear();
@@ -64,6 +68,7 @@ impl FrameState {
         *tooltip_rect = None;
         *scroll_delta = input.scroll_delta;
         *scroll_target = [None; 2];
+        accesskit_nodes.clear();
     }
 
     /// How much space is still available after panels has been added.
