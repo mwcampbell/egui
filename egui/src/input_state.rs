@@ -304,6 +304,10 @@ impl InputState {
             }
         }
     }
+
+    pub fn has_focus(&self) -> bool {
+        self.raw.has_focus
+    }
 }
 
 // ----------------------------------------------------------------------------

@@ -660,7 +660,7 @@ impl Context {
 
         let memory = self.memory.lock();
         let focus_id = memory.interaction.focus.id;
-        output.accesskit_update.focus = Some(focus_id.map_or_else(
+        output.accesskit_update.focus = self.has_focus().then(|| focus_id.map_or_else(
             || crate::accesskit_root_id().accesskit_id(),
             |id| id.accesskit_id(),
         ));
@@ -1018,6 +1018,13 @@ impl Context {
         let mut style: Style = (*self.style()).clone();
         style.ui(ui);
         self.set_style(style);
+    }
+}
+
+/// ## Global focus
+impl Context {
+    pub fn has_focus(&self) -> bool {
+        self.input().has_focus()
     }
 }
 

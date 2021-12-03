@@ -55,6 +55,9 @@ pub struct RawInput {
     /// Note: when using `eframe` on Windows you need to enable
     /// drag-and-drop support using `epi::NativeOptions`.
     pub dropped_files: Vec<DroppedFile>,
+
+    /// Indicates whether this window has keyboard focus.
+    pub has_focus: bool,
 }
 
 impl Default for RawInput {
@@ -68,6 +71,7 @@ impl Default for RawInput {
             events: vec![],
             hovered_files: Default::default(),
             dropped_files: Default::default(),
+            has_focus: true,
         }
     }
 }
@@ -87,6 +91,7 @@ impl RawInput {
             events: std::mem::take(&mut self.events),
             hovered_files: self.hovered_files.clone(),
             dropped_files: std::mem::take(&mut self.dropped_files),
+            has_focus: self.has_focus,
         }
     }
 
@@ -101,6 +106,7 @@ impl RawInput {
             mut events,
             mut hovered_files,
             mut dropped_files,
+            has_focus,
         } = newer;
 
         self.screen_rect = screen_rect.or(self.screen_rect);
@@ -111,6 +117,7 @@ impl RawInput {
         self.events.append(&mut events);
         self.hovered_files.append(&mut hovered_files);
         self.dropped_files.append(&mut dropped_files);
+        self.has_focus = has_focus;
     }
 }
 
@@ -355,6 +362,7 @@ impl RawInput {
             events,
             hovered_files,
             dropped_files,
+            has_focus,
         } = self;
 
         ui.label(format!("screen_rect: {:?} points", screen_rect));
@@ -373,6 +381,7 @@ impl RawInput {
             .on_hover_text("key presses etc");
         ui.label(format!("hovered_files: {}", hovered_files.len()));
         ui.label(format!("dropped_files: {}", dropped_files.len()));
+        ui.label(format!("has_focus: {}", has_focus));
     }
 }
 

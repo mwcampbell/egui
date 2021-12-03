@@ -188,7 +188,7 @@ impl Response {
 
     /// This widget has the keyboard focus (i.e. is receiving key presses).
     pub fn has_focus(&self) -> bool {
-        self.ctx.memory().has_focus(self.id)
+        self.ctx.has_focus() && self.ctx.memory().has_focus(self.id)
     }
 
     /// True if this widget has keyboard focus this frame, but didn't last frame.

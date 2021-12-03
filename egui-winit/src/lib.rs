@@ -264,7 +264,8 @@ impl State {
                 egui_ctx.wants_keyboard_input()
                     || input.virtual_keycode == Some(winit::event::VirtualKeyCode::Tab)
             }
-            WindowEvent::Focused(_) => {
+            WindowEvent::Focused(has_focus) => {
+                self.egui_input.has_focus = *has_focus;
                 // We will not be given a KeyboardInput event when the modifiers are released while
                 // the window does not have focus. Unset all modifier state to be safe.
                 self.egui_input.modifiers = egui::Modifiers::default();
