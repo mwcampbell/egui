@@ -21,7 +21,7 @@ checksum = "a13739d7177fbd22bb0ed28badfff9f372f8bef46c863db4e1c6248f6b223b6e"
 [[package]]
 name = "accesskit"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#253f2736f831abd969447a943e882c1911a4ed65"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
 dependencies = [
  "enumset",
 ]
@@ -29,7 +29,7 @@ dependencies = [
 [[package]]
 name = "accesskit_consumer"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#253f2736f831abd969447a943e882c1911a4ed65"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
 dependencies = [
  "accesskit",
  "im",
@@ -39,7 +39,7 @@ dependencies = [
 [[package]]
 name = "accesskit_windows"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#253f2736f831abd969447a943e882c1911a4ed65"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
