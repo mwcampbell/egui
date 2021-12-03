@@ -500,6 +500,13 @@ impl Response {
             if let Some(label) = info.label {
                 node.name = Some(label.into());
             }
+            if let Some(selected) = info.selected {
+                node.checked_state = Some(if selected {
+                    accesskit::CheckedState::True
+                } else {
+                    accesskit::CheckedState::False
+                });
+            }
         });
     }
 
