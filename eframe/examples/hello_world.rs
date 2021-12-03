@@ -25,8 +25,8 @@ impl epi::App for MyApp {
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("My egui Application");
             ui.horizontal(|ui| {
-                ui.label("Your name: ");
-                ui.text_edit_singleline(name);
+                let label = ui.label("Your name: ");
+                ui.text_edit_singleline(name).labelled_by(label.id);
             });
             ui.add(egui::Slider::new(age, 0..=120).text("age"));
             if ui.button("Click each year").clicked() {
