@@ -188,6 +188,13 @@ impl CtxRef {
         enabled: bool,
         hovered: bool,
     ) -> Response {
+        if sense.focusable {
+            self.modify_accesskit_node(id, |node| {
+                node.ignored = false;
+                node.focusable = true;
+            });
+        }
+
         let hovered = hovered && enabled; // can't even hover disabled widgets
 
         let mut response = Response {
