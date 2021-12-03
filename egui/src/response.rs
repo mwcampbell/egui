@@ -505,7 +505,7 @@ impl Response {
 
     /// Associate a label with a control for accessibility.
     pub fn labelled_by(self, id: Id) -> Self {
-        self.ctx.modify_accesskit_node(id, |node| {
+        self.ctx.modify_accesskit_node(self.id, |node| {
             node.labelled_by.push(id.accesskit_id());
         });
         self
