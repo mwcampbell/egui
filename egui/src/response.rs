@@ -478,29 +478,29 @@ impl Response {
             self.ctx.output().events.push(event);
         }
 
-        // TODO: Create a hierarchy where appropriate.
-        self.ctx
-            .new_accesskit_node(self.id, crate::accesskit_root_id(), |node| {
-                let info = make_info();
-                node.ignored = false;
-                node.role = match info.typ {
-                    WidgetType::Label => accesskit::Role::StaticText,
-                    WidgetType::Hyperlink => accesskit::Role::Link,
-                    WidgetType::TextEdit => accesskit::Role::TextField,
-                    WidgetType::Button => accesskit::Role::Button,
-                    WidgetType::Checkbox => accesskit::Role::CheckBox,
-                    WidgetType::RadioButton => accesskit::Role::RadioButton,
-                    WidgetType::SelectableLabel => accesskit::Role::StaticText,
-                    WidgetType::ComboBox => accesskit::Role::PopupButton,
-                    WidgetType::Slider => accesskit::Role::Slider,
-                    WidgetType::DragValue => accesskit::Role::SpinButton,
-                    WidgetType::ColorButton => accesskit::Role::Button,
-                    WidgetType::ImageButton => accesskit::Role::Button,
-                    WidgetType::CollapsingHeader => accesskit::Role::Button,
-                    WidgetType::Other => accesskit::Role::Unknown,
-                };
-                node.name = info.label.map(|label| label.into());
-            });
+        self.ctx.modify_accesskit_node(self.id, |node| {
+            let info = make_info();
+            node.ignored = false;
+            node.role = match info.typ {
+                WidgetType::Label => accesskit::Role::StaticText,
+                WidgetType::Hyperlink => accesskit::Role::Link,
+                WidgetType::TextEdit => accesskit::Role::TextField,
+                WidgetType::Button => accesskit::Role::Button,
+                WidgetType::Checkbox => accesskit::Role::CheckBox,
+                WidgetType::RadioButton => accesskit::Role::RadioButton,
+                WidgetType::SelectableLabel => accesskit::Role::StaticText,
+                WidgetType::ComboBox => accesskit::Role::PopupButton,
+                WidgetType::Slider => accesskit::Role::Slider,
+                WidgetType::DragValue => accesskit::Role::SpinButton,
+                WidgetType::ColorButton => accesskit::Role::Button,
+                WidgetType::ImageButton => accesskit::Role::Button,
+                WidgetType::CollapsingHeader => accesskit::Role::Button,
+                WidgetType::Other => accesskit::Role::Unknown,
+            };
+            if let Some(label) = info.label {
+                node.name = Some(label.into());
+            }
+        });
     }
 
     /// Response to secondary clicks (right-clicks) by showing the given menu.

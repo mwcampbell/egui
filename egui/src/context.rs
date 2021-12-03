@@ -1023,13 +1023,23 @@ impl Context {
 
 /// ## Accessibility
 impl Context {
-    pub fn new_accesskit_node(&self, id: Id, parent_id: Id, f: impl FnOnce(&mut accesskit::Node)) {
+    pub fn new_accesskit_node(&self, id: Id, parent_id: Id, rect: Rect) {
         let accesskit_id = id.accesskit_id();
-        let mut node = accesskit::Node {
+        let pixels_per_point = self.pixels_per_point();
+        let node = accesskit::Node {
+            bounds: Some(accesskit::RelativeBounds {
+                offset_container: None,
+                rect: accesskit::Rect {
+                    left: rect.min.x * pixels_per_point,
+                    top: rect.min.y * pixels_per_point,
+                    width: rect.width() * pixels_per_point,
+                    height: rect.height() * pixels_per_point,
+                },
+                transform: None,
+            }),
             ignored: true,
             ..accesskit::Node::new(accesskit_id, accesskit::Role::GenericContainer)
         };
-        f(&mut node);
         let mut frame_state = self.frame_state.lock();
         assert!(!frame_state.accesskit_nodes.contains_key(&id));
         let mut output = self.output();

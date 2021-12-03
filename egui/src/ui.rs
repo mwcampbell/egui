@@ -686,6 +686,9 @@ impl Ui {
         let id = Id::new(self.next_auto_id_source);
         self.next_auto_id_source = self.next_auto_id_source.wrapping_add(1);
 
+        // TODO: create a hierarchy of AccessKit nodes
+        self.ctx().new_accesskit_node(id, crate::accesskit_root_id(), rect);
+
         (id, rect)
     }
 
