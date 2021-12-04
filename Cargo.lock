@@ -21,7 +21,7 @@ checksum = "a13739d7177fbd22bb0ed28badfff9f372f8bef46c863db4e1c6248f6b223b6e"
 [[package]]
 name = "accesskit"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c17864dc099f4ff3359aeb86b271941945150c78"
 dependencies = [
  "enumset",
 ]
@@ -29,7 +29,7 @@ dependencies = [
 [[package]]
 name = "accesskit_consumer"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c17864dc099f4ff3359aeb86b271941945150c78"
 dependencies = [
  "accesskit",
  "im",
@@ -39,12 +39,13 @@ dependencies = [
 [[package]]
 name = "accesskit_windows"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#8586aa345274d0ab52d9c36fe02cf0693261bdb1"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c17864dc099f4ff3359aeb86b271941945150c78"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
  "arrayvec",
  "lazy-init",
+ "paste",
  "windows 0.27.0",
 ]
 
@@ -1998,6 +1999,12 @@ dependencies = [
  "smallvec",
  "winapi",
 ]
+
+[[package]]
+name = "paste"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
 
 [[package]]
 name = "peeking_take_while"
