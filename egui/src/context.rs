@@ -1043,15 +1043,11 @@ impl Context {
         let accesskit_id = id.accesskit_id();
         let pixels_per_point = self.pixels_per_point();
         let node = accesskit::Node {
-            bounds: Some(accesskit::RelativeBounds {
-                offset_container: None,
-                rect: accesskit::Rect {
-                    left: rect.min.x * pixels_per_point,
-                    top: rect.min.y * pixels_per_point,
-                    width: rect.width() * pixels_per_point,
-                    height: rect.height() * pixels_per_point,
-                },
-                transform: None,
+            bounds: Some(accesskit::kurbo::Rect {
+                x0: (rect.min.x * pixels_per_point).into(),
+                y0: (rect.min.y * pixels_per_point).into(),
+                x1: (rect.max.x * pixels_per_point).into(),
+                y1: (rect.max.y * pixels_per_point).into(),
             }),
             ignored: true,
             ..accesskit::Node::new(accesskit_id, accesskit::Role::GenericContainer)
