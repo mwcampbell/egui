@@ -610,7 +610,10 @@ impl Context {
         assert!(nodes.is_empty());
         let id = crate::accesskit_root_id();
         let accesskit_id = id.accesskit_id();
-        let node = accesskit::Node::new(accesskit_id, accesskit::Role::Window);
+        let node = accesskit::Node {
+            transform: Some(accesskit::kurbo::Affine::scale(self.pixels_per_point().into()).into()),
+            ..accesskit::Node::new(accesskit_id, accesskit::Role::Window)
+        };
         nodes.push(node);
         frame_state.accesskit_nodes.insert(id, nodes.len() - 1);
         assert!(output.accesskit_update.tree.is_none());
@@ -1041,13 +1044,12 @@ impl Context {
 impl Context {
     pub fn new_accesskit_node(&self, id: Id, parent_id: Id, rect: Rect) {
         let accesskit_id = id.accesskit_id();
-        let pixels_per_point = self.pixels_per_point();
         let node = accesskit::Node {
             bounds: Some(accesskit::kurbo::Rect {
-                x0: (rect.min.x * pixels_per_point).into(),
-                y0: (rect.min.y * pixels_per_point).into(),
-                x1: (rect.max.x * pixels_per_point).into(),
-                y1: (rect.max.y * pixels_per_point).into(),
+                x0: rect.min.x.into(),
+                y0: rect.min.y.into(),
+                x1: rect.max.x.into(),
+                y1: rect.max.y.into(),
             }),
             ignored: true,
             ..accesskit::Node::new(accesskit_id, accesskit::Role::GenericContainer)
