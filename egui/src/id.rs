@@ -75,6 +75,12 @@ impl Id {
     }
 }
 
+impl From<accesskit::NodeId> for Id {
+    fn from(id: accesskit::NodeId) -> Self {
+        Self(id.0.get())
+    }
+}
+
 impl std::fmt::Debug for Id {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:016X}", self.0)

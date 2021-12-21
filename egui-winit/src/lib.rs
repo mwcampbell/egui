@@ -302,6 +302,12 @@ impl State {
                 };
                 false
             }
+            WindowEvent::AccessKitActionRequested(request) => {
+                self.egui_input
+                    .events
+                    .push(egui::Event::AccessKitActionRequest(request.clone()));
+                true
+            }
             _ => {
                 // dbg!(event);
                 false

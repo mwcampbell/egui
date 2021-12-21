@@ -149,6 +149,8 @@ pub(crate) struct Focus {
     /// Give focus to this widget next frame
     id_next_frame: Option<Id>,
 
+    id_requested_by_accesskit: Option<Id>,
+
     /// If set, the next widget that is interested in focus will automatically get it.
     /// Probably because the user pressed Tab.
     give_to_next: bool,
@@ -206,6 +208,7 @@ impl Focus {
             self.id = Some(id);
         }
 
+        self.id_requested_by_accesskit = None;
         self.pressed_tab = false;
         self.pressed_shift_tab = false;
         for event in &new_input.events {
@@ -236,6 +239,15 @@ impl Focus {
                     }
                 }
             }
+
+            if let crate::Event::AccessKitActionRequest(accesskit::ActionRequest {
+                action: accesskit::Action::Focus,
+                target,
+                data: None,
+            }) = event
+            {
+                self.id_requested_by_accesskit = Some((*target).into());
+            }
         }
     }
 
@@ -256,7 +268,12 @@ impl Focus {
     }
 
     fn interested_in_focus(&mut self, id: Id) {
-        if self.give_to_next && !self.had_focus_last_frame(id) {
+        if self.id_requested_by_accesskit == Some(id) {
+            self.id = self.id_requested_by_accesskit.take();
+            self.give_to_next = false;
+            self.pressed_tab = false;
+            self.pressed_shift_tab = false;
+        } else if self.give_to_next && !self.had_focus_last_frame(id) {
             self.id = Some(id);
             self.give_to_next = false;
         } else if self.id == Some(id) {
