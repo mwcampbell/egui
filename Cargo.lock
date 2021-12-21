@@ -21,7 +21,7 @@ checksum = "a13739d7177fbd22bb0ed28badfff9f372f8bef46c863db4e1c6248f6b223b6e"
 [[package]]
 name = "accesskit"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c8c83bb9c4f28e7e993f4912ef2d71e95899fcf5"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
 dependencies = [
  "enumset",
  "kurbo",
@@ -30,7 +30,7 @@ dependencies = [
 [[package]]
 name = "accesskit_consumer"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c8c83bb9c4f28e7e993f4912ef2d71e95899fcf5"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
 dependencies = [
  "accesskit",
  "im",
@@ -40,7 +40,7 @@ dependencies = [
 [[package]]
 name = "accesskit_windows"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#c8c83bb9c4f28e7e993f4912ef2d71e95899fcf5"
+source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
@@ -3243,7 +3243,7 @@ checksum = "dee1b76aec4e2bead4758a181b663c37af0de7ec56fe6837c10215b8d6a1635f"
 [[package]]
 name = "winit"
 version = "0.25.0"
-source = "git+https://github.com/mwcampbell/winit?branch=accesskit#8846861eebaece0533b5c9dbe9f1082f6b3b2792"
+source = "git+https://github.com/mwcampbell/winit?branch=accesskit#2218fc251630ce9cc26e0038ccc7e7c638d8e86e"
 dependencies = [
  "accesskit",
  "accesskit_windows",
