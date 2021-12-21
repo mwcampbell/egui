@@ -21,16 +21,19 @@ checksum = "a13739d7177fbd22bb0ed28badfff9f372f8bef46c863db4e1c6248f6b223b6e"
 [[package]]
 name = "accesskit"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf70b72e2fddf92f5c2f961bc2946b2a28101d9bdb253efb1a108f31fa2834e4"
 dependencies = [
  "enumset",
  "kurbo",
+ "serde",
 ]
 
 [[package]]
 name = "accesskit_consumer"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "672b8cdba06b9c61fee66d3a00aa65bd9000bbd93a051130ca9c7376eb9be4fa"
 dependencies = [
  "accesskit",
  "im",
@@ -40,7 +43,8 @@ dependencies = [
 [[package]]
 name = "accesskit_windows"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=egui-work#5ab358fd6f59293009a8d28992c5400f98e198c2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7787f3d651ff91a28bbc91ac01b5b1ee49f1ccac4a0ae8ca33d023338cb449b6"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
@@ -1023,6 +1027,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6216d2c19a6fb5f29d1ada1dc7bc4367a8cbf0fa4af5cf12e07b5bbdde6b5b2c"
 dependencies = [
  "enumset_derive",
+ "serde",
 ]
 
 [[package]]
@@ -1524,6 +1529,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a53776d271cfb873b17c618af0298445c88afc52837f3e948fa3fafd131f449"
 dependencies = [
  "arrayvec",
+ "serde",
 ]
 
 [[package]]
@@ -3243,7 +3249,7 @@ checksum = "dee1b76aec4e2bead4758a181b663c37af0de7ec56fe6837c10215b8d6a1635f"
 [[package]]
 name = "winit"
 version = "0.25.0"
-source = "git+https://github.com/mwcampbell/winit?branch=accesskit#2218fc251630ce9cc26e0038ccc7e7c638d8e86e"
+source = "git+https://github.com/mwcampbell/winit?branch=accesskit#9a5a3b489d7479900d274ff445f64f40de267369"
 dependencies = [
  "accesskit",
  "accesskit_windows",
