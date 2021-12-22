@@ -1,6 +1,7 @@
 // TODO: `TextureData` or similar?
 /// An 8-bit texture containing font data.
 #[derive(Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct Texture {
     /// e.g. a hash of the data. Use this to detect changes!
     /// If the texture changes, this too will change.
