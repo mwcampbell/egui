@@ -8,7 +8,8 @@ fn create_display(event_loop: &glutin::event_loop::EventLoop<()>) -> glium::Disp
             width: 800.0,
             height: 600.0,
         })
-        .with_title("egui_glium example");
+        .with_title("egui_glium example")
+        .with_accesskit_factory(egui::accesskit_placeholder_tree_update());
 
     let context_builder = glutin::ContextBuilder::new()
         .with_depth_buffer(0)
