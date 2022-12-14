@@ -66,7 +66,7 @@ nohash-hasher = "0.2"
 #! ### Optional dependencies
 ## Exposes detailed accessibility implementation required by platform
 ## accessibility APIs. Also requires support in the egui integration.
-accesskit = { version = "0.8.1", optional = true }
+accesskit = { git = "https://github.com/AccessKit/accesskit", branch = "macos-basic-text", optional = true }
 
 ## Enable this when generating docs.
 document-features = { version = "0.2", optional = true }
