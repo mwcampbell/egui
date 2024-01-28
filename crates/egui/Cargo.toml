@@ -85,7 +85,7 @@ ahash = { version = "0.8.6", default-features = false, features = [
 nohash-hasher = "0.2"
 
 #! ### Optional dependencies
-accesskit = { version = "0.12", optional = true }
+accesskit = { git = "https://github.com/AccessKit/accesskit", branch = "unix2-prototype", optional = true }
 
 backtrace = { version = "0.3", optional = true }
 
