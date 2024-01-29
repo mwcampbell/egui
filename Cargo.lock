@@ -21,7 +21,7 @@ checksum = "c71b1793ee61086797f5c80b6efa2b8ffa6d5dd703f118545808a7f2e27f7046"
 [[package]]
 name = "accesskit"
 version = "0.12.2"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "enumn",
  "serde",
@@ -30,7 +30,7 @@ dependencies = [
 [[package]]
 name = "accesskit_consumer"
 version = "0.17.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "accesskit",
 ]
@@ -38,7 +38,7 @@ dependencies = [
 [[package]]
 name = "accesskit_macos"
 version = "0.11.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
@@ -50,7 +50,7 @@ dependencies = [
 [[package]]
 name = "accesskit_unix2"
 version = "0.1.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
@@ -66,7 +66,7 @@ dependencies = [
 [[package]]
 name = "accesskit_windows"
 version = "0.16.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "accesskit",
  "accesskit_consumer",
@@ -79,7 +79,7 @@ dependencies = [
 [[package]]
 name = "accesskit_winit"
 version = "0.18.0"
-source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#76841b0e7589e68d0b1923bb625d7014e40d2c26"
+source = "git+https://github.com/AccessKit/accesskit?branch=unix2-prototype#fcbb6845d49379fde82cda55517205b7e2901a6b"
 dependencies = [
  "accesskit",
  "accesskit_macos",
@@ -847,7 +847,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e16e44ab292b1dddfdaf7be62cfd8877df52f2f3fde5858d95bab606be259f20"
 dependencies = [
  "bitflags 2.4.0",
- "libloading 0.8.0",
+ "libloading 0.7.4",
  "winapi",
 ]
 
@@ -899,7 +899,7 @@ version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "330c60081dcc4c72131f8eb70510f1ac07223e5d4163db481a04a0befcffa412"
 dependencies = [
- "libloading 0.8.0",
+ "libloading 0.7.4",
 ]
 
 [[package]]
@@ -3692,7 +3692,7 @@ dependencies = [
 [[package]]
 name = "wayland-backend"
 version = "0.3.2"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "cc",
  "downcast-rs",
@@ -3717,7 +3717,7 @@ dependencies = [
 [[package]]
 name = "wayland-client"
 version = "0.31.1"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "bitflags 2.4.0",
  "rustix 0.38.21",
@@ -3760,7 +3760,7 @@ dependencies = [
 [[package]]
 name = "wayland-cursor"
 version = "0.31.0"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "rustix 0.38.21",
  "wayland-client 0.31.1 (git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol)",
@@ -3782,7 +3782,7 @@ dependencies = [
 [[package]]
 name = "wayland-protocols"
 version = "0.31.0"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "bitflags 2.4.0",
  "wayland-backend 0.3.2 (git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol)",
@@ -3819,7 +3819,7 @@ dependencies = [
 [[package]]
 name = "wayland-protocols-wlr"
 version = "0.2.0"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "bitflags 2.4.0",
  "wayland-backend 0.3.2 (git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol)",
@@ -3842,7 +3842,7 @@ dependencies = [
 [[package]]
 name = "wayland-scanner"
 version = "0.31.0"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "proc-macro2",
  "quick-xml 0.31.0",
@@ -3864,7 +3864,7 @@ dependencies = [
 [[package]]
 name = "wayland-sys"
 version = "0.31.1"
-source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#d6b864e9c72692c465a71815cb307c57100fa350"
+source = "git+https://github.com/mwcampbell/wayland-rs.git?branch=accessibility-protocol#9fdd5895c81c673e39f619ed07adf017b5d202b5"
 dependencies = [
  "dlib",
  "log",
@@ -3987,7 +3987,7 @@ dependencies = [
  "js-sys",
  "khronos-egl",
  "libc",
- "libloading 0.8.0",
+ "libloading 0.7.4",
  "log",
  "metal",
  "naga",
