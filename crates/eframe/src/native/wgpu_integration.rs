@@ -249,7 +249,7 @@ impl WgpuWinitApp {
         #[cfg(feature = "accesskit")]
         {
             let event_loop_proxy = self.repaint_proxy.lock().clone();
-            integration.init_accesskit(&mut egui_winit, &window, event_loop_proxy);
+            egui_winit.init_accesskit(&window, event_loop_proxy);
         }
         let theme = system_theme.unwrap_or(self.native_options.default_theme);
         egui_ctx.set_visuals(theme.egui_visuals());
@@ -486,9 +486,10 @@ impl WinitApp for WgpuWinitApp {
             }
 
             #[cfg(feature = "accesskit")]
-            winit::event::Event::UserEvent(UserEvent::AccessKitActionRequest(
-                accesskit_winit::ActionRequestEvent { request, window_id },
-            )) => {
+            winit::event::Event::UserEvent(UserEvent::AccessKitEvent(accesskit_winit::Event {
+                window_id,
+                window_event,
+            })) => {
                 if let Some(running) = &mut self.running {
                     let mut shared_lock = running.shared.borrow_mut();
                     let SharedState {
@@ -501,12 +502,17 @@ impl WinitApp for WgpuWinitApp {
                         .and_then(|id| viewports.get_mut(id))
                     {
                         if let Some(egui_winit) = &mut viewport.egui_winit {
-                            egui_winit.on_accesskit_action_request(request.clone());
+                            winit_integration::on_accesskit_window_event(
+                                egui_winit,
+                                *window_id,
+                                window_event,
+                            )
+                        } else {
+                            EventResult::Wait
                         }
+                    } else {
+                        EventResult::Wait
                     }
-                    // As a form of user input, accessibility actions should
-                    // lead to a repaint.
-                    EventResult::RepaintNext(*window_id)
                 } else {
                     EventResult::Wait
                 }
