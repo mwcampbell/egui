@@ -64,7 +64,7 @@ winit = { workspace = true, default-features = false, features = ["rwh_06"] }
 #! ### Optional dependencies
 
 # feature accesskit
-accesskit_winit = { git = "https://github.com/AccessKit/accesskit.git", branch = "new-lazy-init", optional = true }
+accesskit_winit = { git = "https://github.com/AccessKit/accesskit.git", optional = true }
 
 ## Enable this when generating docs.
 document-features = { workspace = true, optional = true }

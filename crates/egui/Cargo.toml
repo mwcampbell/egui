@@ -87,7 +87,7 @@ ahash.workspace = true
 nohash-hasher.workspace = true
 
 #! ### Optional dependencies
-accesskit = { git = "https://github.com/AccessKit/accesskit.git", branch = "new-lazy-init", optional = true }
+accesskit = { git = "https://github.com/AccessKit/accesskit.git", optional = true }
 
 backtrace = { workspace = true, optional = true }
 
