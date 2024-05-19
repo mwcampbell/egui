@@ -270,7 +270,7 @@ impl GlowWinitApp {
                 ..
             } = viewport
             {
-                integration.init_accesskit(egui_winit, window, event_loop_proxy);
+                egui_winit.init_accesskit(window, event_loop_proxy);
             }
         }
 
@@ -471,22 +471,30 @@ impl WinitApp for GlowWinitApp {
             }
 
             #[cfg(feature = "accesskit")]
-            winit::event::Event::UserEvent(UserEvent::AccessKitActionRequest(
-                accesskit_winit::ActionRequestEvent { request, window_id },
-            )) => {
+            winit::event::Event::UserEvent(UserEvent::AccessKitEvent(accesskit_winit::Event {
+                window_id,
+                window_event,
+            })) => {
                 if let Some(running) = &self.running {
                     let mut glutin = running.glutin.borrow_mut();
                     if let Some(viewport_id) = glutin.viewport_from_window.get(window_id).copied() {
                         if let Some(viewport) = glutin.viewports.get_mut(&viewport_id) {
                             if let Some(egui_winit) = &mut viewport.egui_winit {
-                                crate::profile_scope!("on_accesskit_action_request");
-                                egui_winit.on_accesskit_action_request(request.clone());
+                                crate::profile_scope!("on_accesskit_window_event");
+                                winit_integration::on_accesskit_window_event(
+                                    egui_winit,
+                                    *window_id,
+                                    window_event,
+                                )
+                            } else {
+                                EventResult::Wait
                             }
+                        } else {
+                            EventResult::Wait
                         }
+                    } else {
+                        EventResult::Wait
                     }
-                    // As a form of user input, accessibility actions should
-                    // lead to a repaint.
-                    EventResult::RepaintNext(*window_id)
                 } else {
                     EventResult::Wait
                 }

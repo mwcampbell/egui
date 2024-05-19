@@ -86,7 +86,7 @@ ahash.workspace = true
 nohash-hasher.workspace = true
 
 #! ### Optional dependencies
-accesskit = { version = "0.12", optional = true }
+accesskit = { git = "https://github.com/AccessKit/accesskit.git", branch = "winit-0.29-backport", optional = true }
 
 backtrace = { workspace = true, optional = true }
 

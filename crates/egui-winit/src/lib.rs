@@ -158,16 +158,14 @@ impl State {
     }
 
     #[cfg(feature = "accesskit")]
-    pub fn init_accesskit<T: From<accesskit_winit::ActionRequestEvent> + Send>(
+    pub fn init_accesskit<T: From<accesskit_winit::Event> + Send>(
         &mut self,
         window: &Window,
         event_loop_proxy: winit::event_loop::EventLoopProxy<T>,
-        initial_tree_update_factory: impl 'static + FnOnce() -> accesskit::TreeUpdate + Send,
     ) {
         crate::profile_function!();
-        self.accesskit = Some(accesskit_winit::Adapter::new(
+        self.accesskit = Some(accesskit_winit::Adapter::with_event_loop_proxy(
             window,
-            initial_tree_update_factory,
             event_loop_proxy,
         ));
     }
@@ -263,7 +261,7 @@ impl State {
         crate::profile_function!(short_window_event_description(event));
 
         #[cfg(feature = "accesskit")]
-        if let Some(accesskit) = &self.accesskit {
+        if let Some(accesskit) = &mut self.accesskit {
             accesskit.process_event(window, event);
         }
 
@@ -867,7 +865,7 @@ impl State {
         }
 
         #[cfg(feature = "accesskit")]
-        if let Some(accesskit) = self.accesskit.as_ref() {
+        if let Some(accesskit) = &mut self.accesskit {
             if let Some(update) = accesskit_update {
                 crate::profile_scope!("accesskit");
                 accesskit.update_if_active(|| update);
